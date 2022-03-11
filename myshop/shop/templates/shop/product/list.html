@@ -172,7 +172,7 @@ nav {
         {% for product in products %}
             <div class="item">
                 <div class="header-h1">
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br></br>
                 <a href="{{ product.get_absolute_url }}">
                     <img id = "bookIMG" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
                 </a>

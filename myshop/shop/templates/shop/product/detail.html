@@ -1,7 +1,7 @@
 {% extends "shop/base.html" %}
 {% load static %}
 {% block title %}
-    {% if category %}{{ category.title }}{% else %}Книги{% endif %}
+{% if category %}{{ category.title }}{% else %}Книги{% endif %}
 {% endblock %}
 {% block content %}
 <style>
@@ -157,18 +157,23 @@ body {background: #F4F7EE;}
 
 p { color: #685206; font-family: ‘Helvetica Neue’, sans-serif; font-size: 14px; line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word; }
 </style>
-    <div id="product-detail">
-        <div class="header-h1">
+<div id="product-detail">
+    <div class="header-h1">
         <div id = "imgDetail">
-        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
         </div></div>
-         <div id = "infoDetail">
-             <div class="three">
-        <h1>{{ product.name }}</h1>
-             </div>
-        <h3 class="price">Цена: {{ product.price }} руб.</h3>
-        {{ product.description|linebreaks }}
-             <h4><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h4>
+    <div id = "infoDetail">
+        <div class="three">
+            <h1>{{ product.name }}</h1>
         </div>
+        <h3 class="price">Цена: {{ product.price }} руб.</h3>
+        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+            {{ cart_product_form }}
+            {% csrf_token %}
+        <input type="submit" value="Add to cart">
+        </form>
+        {{ product.description|linebreaks }}
+        <h4><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h4>
     </div>
+</div>
 {% endblock %}
