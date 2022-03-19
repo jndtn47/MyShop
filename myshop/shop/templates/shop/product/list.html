@@ -1,160 +1,74 @@
 {% extends "shop/base.html" %}
 {% load static %}
 {% block title %}
-    {% if category %}{{ category.name }}{% else %}Книги{% endif %}
+    {% if category %}{{ category.name }}{% else %}Животные{% endif %}
 {% endblock %}
 {% block content %}
 <style>
-    #bookIMG {width: 400; height: 500;}
-    #sidebar {background-color: rgb(255, 255, 128); }
-   url(https://fonts.googleapis.com/css?family=Lora);
-body {margin:0;}
-h2 {
-  font-family: monospace;
-  color: #606060;
+a {text-decoration: none;}
+    #bookIMG {width: 250; height: 300;}
+   .sidebar ul {
+  list-style: none; /*убираем маркеры списка*/
+  margin: 0; /*убираем отступы*/
+  padding-left: 0; /*убираем отступы*/
+  margin-top:25px; /*делаем отступ сверху*/
 }
-ul {
-  list-style: none;
-  margin: 0 auto;
+.sidebar a {
+  text-decoration: none; /*убираем подчеркивание текста ссылок*/
+  background:#30A8E6; /*добавляем фон к пункту меню*/
+  color:#fff; /*меняем цвет ссылок*/
+  padding:10px; /*добавляем отступ*/
+  font-family: arial; /*меняем шрифт*/
+  border-radius:4px; /*добавляем скругление*/
+  -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+  -o-transition: all 0.3s 0.01s ease;
+  -webkit-transition: all 0.3s 0.01s ease;
 }
-a {
-  text-decoration: none;
-  font-family: 'Lora', serif;
-  transition: .5s linear;
+.sidebar a:hover {
+  background:#1C85BB;/*добавляем эффект при наведении*/
 }
-i {
-  margin-right: 10px;
-}
-nav {
-  display: block;
-  margin: 0 auto 30px;
-}
-.two ul {
-  background: #D4E7EE;
-  overflow: hidden;
-  padding: 0;
-}
-.two li {
-  float: left;
-}
-.two a {
-  display: block;
-  padding: 1em;
-  border-right: 1px solid #ADC0CE;
-  background: rgba(173, 192, 206, .3);
-  color: #29838C;
-}
-.two a:hover {background: #ADC0CE}
-.three ul {
-  padding: 0;
-  background: #E4EFD1;
+.sidebar li {
+  float:left; /*Размещаем список горизонтально для реализации меню*/
+  margin-right:5px; /*Добавляем отступ у пунктов меню*/
+
 }
 
-.four {
-  background: #F4F7EE;
+.one {
+  background: #FFF4ED;
   padding: 50px 20px;
   text-align: center;
 }
-.four h1 {
-  font-family: 'Merriweather', serif;
+.one h1 {
+  font-family: 'Righteous', cursive;
   position: relative;
-  color: #C44737;
-  font-size: 50px;
-  font-weight: normal;
-  padding: 8px 20px 7px 20px;
-  border-top: 4px solid;
-  border-left: 4px solid;
+  color: #3CA1D9;
   display: inline-block;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  font-size: 3em;
+  padding: 11px 60px;
   margin: 0;
   line-height: 1;
 }
-.four h1:before {
+.one h1:before, .one h1:after {
   content: "";
   position: absolute;
-  width: 28px;
-  height: 28px;
-  top: -28px;
-  left: -28px;
-  border: 4px solid #C44737;
-  box-sizing: border-box;
+  top: 0;
+  width: 30px;
+  height: 100%;
+  border-left: 2px solid;
+  border-right: 2px solid;
+  background: repeating-linear-gradient(180deg, transparent, transparent 2px, #3CA1D9 2px, #3CA1D9 4px);
 }
-@media (max-width: 450px) {
-  .four h1 {font-size: 36px;}
-  .four h1:before {
-    width: 20px;
-    height: 20px;
-    top: -20px;
-    left: -20px;
-  }
+.one h1:before {left: 0;}
+.one h1:after {right: 0;}
+@media (max-width: 420px) {
+  .one h1 {font-size: 2em;}
 }
-
-.header-h1 {
-    text-align: center;
-    margin-bottom: .5rem;
-  }
-  .header-h1 a {
-    display: inline-block;
-    background: #0097a7;
-    color: #fff;
-    margin-bottom: 0;
-    padding: .5rem 1rem .625rem 1rem;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    border-radius: 30px;
-  }
-  .three {
-  background: #F4F7EE;
-  padding: 50px 20px;
-  text-align: center;
-}
-.three h1 {
-  font-family: 'Merriweather', serif;
-  position: relative;
-  color: #FCF2E5;
-  background: #90806A;
-  font-size: 2.5em;
-  font-weight: normal;
-  padding: 10px 40px;
-  display: inline-block;
-  margin: 0;
-  line-height: 1;
-}
-.three h1:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 4px;
-  left: 0;
-  bottom: -15px;
-  background: #90806A;
-}
-.three h1:after {
-  content: "";
-  position: absolute;
-  height: 0;
-  width: 80%;
-  border-top: 10px solid #90806A;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -25px;
-}
-@media (max-width: 500px) {
-  .three h1 {font-size: 1.8em;}
-}
-@media (max-width: 400px) {
-  .three h1 {
-    font-size: 1.5em;
-    padding: 10px 30px;
-  }
-}
-.header-h1 {background: #F4F7EE;}
-.main {background: #F4F7EE;}
 </style>
-    <div id="sidebar">
-        <div class="four"> <h1>Категории</h1></div>
-        <nav class="two">
+    <div class="sidebar" align="center">
+        <div class="four" align="center"> <h1>Категории</h1></div>
+        <nav class="two" align="center">
         <ul>
             <li {% if not category %}class="selected"{% endif %}>
                 <a href="{% url 'shop:product_list' %}">Все категории</a>
@@ -167,17 +81,19 @@ nav {
         </ul>
             </nav>
     </div>
-    <div id="main" class="product-list">
-       <div class="three"> <h1>{% if category %}{{ category.name }}{% else %}Книги{% endif %}</h1></div>
+</br>
+    <div id="main" class="product-list" align="center">
+       <div class="one"> <h1>{% if category %}{{ category.name }}{% else %}Животные{% endif %}</h1></div>
         {% for product in products %}
             <div class="item">
-                <div class="header-h1">
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                <div>
+                    <a href="{{ product.get_absolute_url }}"><h3>{{ product.name }}</h3></a><br>
                 <a href="{{ product.get_absolute_url }}">
                     <img id = "bookIMG" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
                 </a>
                 </div>
             </div>
+            </br></br>
         {% endfor %}
     </div>
 {% endblock %}
