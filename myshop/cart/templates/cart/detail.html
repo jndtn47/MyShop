@@ -43,7 +43,7 @@ body {background: #F4F7EE;}
                     </td>
                     <td><h3>{{ product.name }}</h3></td>
                     <td><h3>{{ item.quantity }}</h3></td>
-                    <td><h3><a href="{% url 'cart:cart_remove' product.id%}">Remove</h3></a></td>
+                    <td><a href="{% url 'cart:cart_remove' product.id%}">Remove</a></td>
                     <td class="num"><h3>{{ item.price }}руб.</h3></td>
                     <td class="num"><h3>{{ item.total_price }}руб.</h3></td>
                 </tr>

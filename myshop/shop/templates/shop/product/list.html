@@ -1,161 +1,86 @@
 {% extends "shop/base.html" %}
 {% load static %}
 {% block title %}
-    {% if category %}{{ category.name }}{% else %}Книги{% endif %}
+    {% if category %}{{ category.name }}{% else %}Животные{% endif %}
 {% endblock %}
 {% block content %}
 <style>
-    #bookIMG {width: 400; height: 500;}
-    #sidebar {background-color: rgb(255, 255, 128); }
-   url(https://fonts.googleapis.com/css?family=Lora);
-body {margin:0;}
-h2 {
-  font-family: monospace;
-  color: #606060;
+    .rectangle {
+counter-reset: li;
+list-style: none;
+font: 14px "Trebuchet MS", "Lucida Sans";
+padding: 0;
+text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
-ul {
-  list-style: none;
-  margin: 0 auto;
+.rectangle a {
+position: relative;
+display: block;
+padding: .4em .4em .4em .8em;
+margin: .5em 0 .5em 2.5em;
+background: #D3D4DA;
+color: #444;
+text-decoration: none;
+transition: all .3s ease-out;
 }
-a {
-  text-decoration: none;
-  font-family: 'Lora', serif;
-  transition: .5s linear;
+.beads {
+list-style: none;
+background: #EEE3DB;
+margin: 0;
+padding-left: 40px;
+border-radius: 5px;
 }
-i {
-  margin-right: 10px;
+.beads li {
+text-transform: uppercase;
+font-family: 'Montserrat', sans-serif;
+line-height: 40px;
+border-bottom: 1px solid #D4D7D6;
+position: relative;
 }
-nav {
-  display: block;
-  margin: 0 auto 30px;
+.beads a {
+text-decoration: none;
+color: #464643;
+display: block;
+line-height: 40px;
+position: relative;
 }
-.two ul {
-  background: #D4E7EE;
-  overflow: hidden;
-  padding: 0;
+.beads a:before {
+content:"";
+position: absolute;
+left: -20px;
+top: 6px;
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: #A58063;
 }
-.two li {
-  float: left;
+.beads li:last-child {border-bottom: none;}
+.beads li:before,
+.beads li:after {
+content:"";
+position: absolute;
+border-radius: 50%;
 }
-.two a {
-  display: block;
-  padding: 1em;
-  border-right: 1px solid #ADC0CE;
-  background: rgba(173, 192, 206, .3);
-  color: #29838C;
+.beads li:before {
+top: calc(50% - 5px);
+background: #E0926E;
+left: -22px;
+width: 10px;
+height: 10px;
+transition: 0.5s linear;
 }
-.two a:hover {background: #ADC0CE}
-.three ul {
-  padding: 0;
-  background: #E4EFD1;
+.beads li:after {
+bottom: 6px;
+left: -20px;
+width: 6px;
+height: 6px;
+background: #A58063;
 }
-
-.four {
-  background: #F4F7EE;
-  padding: 50px 20px;
-  text-align: center;
-}
-.four h1 {
-  font-family: 'Merriweather', serif;
-  position: relative;
-  color: #C44737;
-  font-size: 50px;
-  font-weight: normal;
-  padding: 8px 20px 7px 20px;
-  border-top: 4px solid;
-  border-left: 4px solid;
-  display: inline-block;
-  margin: 0;
-  line-height: 1;
-}
-.four h1:before {
-  content: "";
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  top: -28px;
-  left: -28px;
-  border: 4px solid #C44737;
-  box-sizing: border-box;
-}
-@media (max-width: 450px) {
-  .four h1 {font-size: 36px;}
-  .four h1:before {
-    width: 20px;
-    height: 20px;
-    top: -20px;
-    left: -20px;
-  }
-}
-
-.header-h1 {
-    text-align: center;
-    margin-bottom: .5rem;
-  }
-  .header-h1 a {
-    display: inline-block;
-    background: #0097a7;
-    color: #fff;
-    margin-bottom: 0;
-    padding: .5rem 1rem .625rem 1rem;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    border-radius: 30px;
-  }
-  .three {
-  background: #F4F7EE;
-  padding: 50px 20px;
-  text-align: center;
-}
-.three h1 {
-  font-family: 'Merriweather', serif;
-  position: relative;
-  color: #FCF2E5;
-  background: #90806A;
-  font-size: 2.5em;
-  font-weight: normal;
-  padding: 10px 40px;
-  display: inline-block;
-  margin: 0;
-  line-height: 1;
-}
-.three h1:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 4px;
-  left: 0;
-  bottom: -15px;
-  background: #90806A;
-}
-.three h1:after {
-  content: "";
-  position: absolute;
-  height: 0;
-  width: 80%;
-  border-top: 10px solid #90806A;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -25px;
-}
-@media (max-width: 500px) {
-  .three h1 {font-size: 1.8em;}
-}
-@media (max-width: 400px) {
-  .three h1 {
-    font-size: 1.5em;
-    padding: 10px 30px;
-  }
-}
-.header-h1 {background: #F4F7EE;}
-.main {background: #F4F7EE;}
+.beads li:hover:before {background: #FFCE08;}
+#bookIMG {width: 280; height: 300;}
 </style>
     <div id="sidebar">
-        <div class="four"> <h1>Категории</h1></div>
         <nav class="two">
-        <ul>
+        <ul class="beads">
             <li {% if not category %}class="selected"{% endif %}>
                 <a href="{% url 'shop:product_list' %}">Все категории</a>
             </li>
@@ -168,7 +93,7 @@ nav {
             </nav>
     </div>
     <div id="main" class="product-list">
-       <div class="three"> <h1>{% if category %}{{ category.name }}{% else %}Книги{% endif %}</h1></div>
+       <div class="three"> <h1>{% if category %}{{ category.name }}{% else %}Животные{% endif %}</h1></div>
         {% for product in products %}
             <div class="item">
                 <div class="header-h1">
