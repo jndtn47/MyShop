@@ -22,14 +22,14 @@
 	border: 1px solid #dddddd;
 	padding: 5px;
 }
-img {width: 250; height: 300; align="center"}
+img {width: 250; height: 200; align="center"}
 </style>
     <h1>Ваша корзина</h1>
     <table class="table">
         <thead>
         <tr>
             <th>Изображение</th>
-            <th>Животное</th>
+            <th>Товар</th>
             <th>Количество</th>
             <th>Удаление</th>
             <th>Цена</th>
@@ -38,7 +38,8 @@ img {width: 250; height: 300; align="center"}
         </thead>
         <tbody>
         {% for item in cart %}
-            {% with product=item.product %}
+            {% with product=item.product%}
+                {% if item.image.url != '' %}
                 <tr>
                     <td align="center">
                         <a href="{{ product.get_absolute_url }}">
@@ -53,15 +54,16 @@ img {width: 250; height: 300; align="center"}
                     <td>{{ product.name }}</td>
                     <td>{{ item.quantity }}</td>
                     <td><a href="{% url 'cart:cart_remove' product.id%}">Удалить</a></td>
-                    <td class="num">{{ item.price }}руб.</td>
-                    <td class="num">{{ item.total_price }}руб.</td>
+                    <td class="num">{{ item.price }} руб.</td>
+                    <td class="num">{{ item.total_price }} руб.</td>
                 </tr>
+                {% endif %}
             {% endwith %}
         {% endfor %}
         <tr class="total">
             <td>Итого</td>
             <td colspan="4"></td>
-            <td class="num">${{ cart.get_total_price }}</td>
+            <td class="num">{{ cart.get_total_price }} руб.</td>
         </tr>
         </tbody>
     </table>

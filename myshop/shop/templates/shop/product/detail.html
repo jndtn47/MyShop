@@ -1,32 +1,32 @@
 {% extends "shop/base.html" %}
 {% load static %}
 {% block title %}
-    {% if category %}{{ category.title }}{% else %}Животные{% endif %}
+    {% if category %}{{ category.title }}{% else %}Информация о товаре{% endif %}
 {% endblock %}
 {% block content %}
 <style>
-    img {width: 500; height: 600;}
-    #imgDetail {width: 30%; height: 600; float: left;}
-    #infoDetail {width: 55%; height: 600;float: right; padding-right: 60px;}
+    img {width: 700; height: 600; :  }
+    #imgDetail {width: 50%; height: 600; float: left;}
+    #infoDetail {width: 33%; height: 600;float: right; padding-right: 60px;}
     #bookIMG {width: 400; height: 500;}
-body {background: #F4F7EE;}
+body {background: #FFFFF;}
 </style>
     <div id="product-detail">
         <div class="header-h1">
         <div id = "imgDetail">
         <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
         </div></div>
-         <div id = "infoDetail">
+         <div id = "infoDetail" align="justify">
              <div class="three">
         <h1>{{ product.name }}</h1>
              </div>
-        <p class="price">{{ product.price }}руб.</p>
+        <p class="price">{{ product.price }} руб.</p>
 <form action="{% url 'cart:cart_add' product.id %}" method="post">
     {{ cart_product_form }}
     {% csrf_token %}
     <input type="submit" value="Добавить">
 </form>
-        {{ product.description|linebreaks }}
+             <p>{{ product.description|linebreaks }}</p>
              <h4><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h4>
         </div>
     </div>
